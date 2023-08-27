@@ -4,15 +4,23 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 
 export default function App() {
-  
   const [todoList, setTodoList] = useState(() => {
-    return JSON.parse(localStorage.getItem("todos"))
+    const savedTodos = localStorage.getItem("todos")
+
+    if (!savedTodos) {
+      return []
+    } else {
+      
+      return JSON.parse(savedTodos)
+    }
+
   })
+
   const [todoName, setTodoName] = useState("")
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoList))
-  })
+  }, [todoList])
   
   function handleTodoNameChange(e) {
     setTodoName(e.target.value)

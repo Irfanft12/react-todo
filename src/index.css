@@ -95,6 +95,7 @@ ul {
 }
 .task-list .completed {
   text-decoration: line-through;
+  color: #ababab;
 }
 .btns-wrapper .checkbox {
   margin-right: 10px;

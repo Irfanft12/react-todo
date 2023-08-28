@@ -22,7 +22,7 @@ export default function TodoItems({item, onDeleteClick, onEditClick}) {
                     e.preventDefault()
                     setIsEditing(false)
                 }}>
-                    <input type="text" value={item.todo} onChange={(e) => onEditClick({
+                    <input type="text" className="edit-input" value={item.todo} onChange={(e) => onEditClick({
                         ...item,
                         todo: e.target.value
                     })} />

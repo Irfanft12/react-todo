@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import {FaPencil, FaTrash} from "react-icons/fa6"
 export default function TodoItems({item, onDeleteClick, onEditClick}) {
     const [isEditing, setIsEditing] = useState(false)
 
@@ -13,8 +13,8 @@ export default function TodoItems({item, onDeleteClick, onEditClick}) {
                     ...item,
                     completed: e.target.checked
                 })} />
-                <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
-                <button className="delete-btn" onClick={() => onDeleteClick(item.id)}>Delete</button>
+                <button className="edit-btn" onClick={() => setIsEditing(true)}><FaPencil /></button>
+                <button className="delete-btn" onClick={() => onDeleteClick(item.id)}><FaTrash /></button>
                </div>
             </div>
             ) : (

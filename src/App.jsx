@@ -9,11 +9,9 @@ export default function App() {
 
     if (!savedTodos) {
       return []
-    } else {
-      
+    } else {      
       return JSON.parse(savedTodos)
     }
-
   })
 
   const [todoName, setTodoName] = useState("")

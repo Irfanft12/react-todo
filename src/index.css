@@ -127,6 +127,7 @@ ul {
   border: 1px solid #dddddd;
   margin-right: 10px;
   width: calc(100% - 71px);
+  font-family: var(--font-family);
 }
 .save-btn {
   padding: 8px 14px;
@@ -134,5 +135,6 @@ ul {
   color: #ffffff;
   border: 1px solid #1c84c9;
   font-weight: 500;
+  font-family: var(--font-family);
 }
 

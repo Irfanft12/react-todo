@@ -56,7 +56,7 @@ export default function App() {
 
     MySwal.fire({
       title: "Are you sure?",
-      text: `You won't be able to revert ${item.todo}!`,
+      html: `<p>You won't be able to revert <b>${item.todo}</b>!</p>`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -68,7 +68,11 @@ export default function App() {
           return t.id !== item.id;
         });
         setTodoList(newTodoList);
-        Swal.fire("Deleted!", `${item.todo} has been deleted.`, "success");
+        Swal.fire({
+         title: "Deleted!",
+         html: `<p><b>${item.todo}</b> has been deleted.</p>`,
+         icon: "success"
+        });
       }
     });
   }

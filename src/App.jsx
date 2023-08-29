@@ -1,86 +1,92 @@
 import { useState, useEffect } from "react";
-import {v4 as uuidv4} from "uuid"
-import Swal from "sweetalert2"
+import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 
 export default function App() {
   const [todoList, setTodoList] = useState(() => {
-    const savedTodos = localStorage.getItem("todos")
-
+    const savedTodos = localStorage.getItem("todos");
     if (!savedTodos) {
-      return []
-    } else {      
-      return JSON.parse(savedTodos)
+      return [];
+    } else {
+      return JSON.parse(savedTodos);
     }
-  })
-
-  const [todoName, setTodoName] = useState("")
+  });
+  const [todoName, setTodoName] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todoList))
-  }, [todoList])
-  
+    localStorage.setItem("todos", JSON.stringify(todoList));
+  }, [todoList]);
+
   function handleTodoNameChange(e) {
-    setTodoName(e.target.value)
+    setTodoName(e.target.value);
+    setShowError(false);
   }
 
   function handleAddTodoSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (todoName.trim()) {
       setTodoList([
-        {id: uuidv4(), todo: todoName, completed: false},
-        ...todoList
-      ])
-      setTodoName("")
+        { id: uuidv4(), todo: todoName, completed: false },
+        ...todoList,
+      ]);
+      setTodoName("");
+    } else {
+      setShowError(true);
     }
   }
 
   function handleEditClick(updatedTodo) {
-    const newTodoList = todoList.map(t => {
+    const newTodoList = todoList.map((t) => {
       if (t.id === updatedTodo.id) {
-        return updatedTodo
+        return updatedTodo;
       } else {
-        return t
+        return t;
       }
-    })
+    });
 
-    setTodoList(newTodoList)
+    setTodoList(newTodoList);
   }
 
-  function handleDeleteClick(id) {
-    const MySwal = withReactContent(Swal)
+  function handleDeleteClick(item) {
+    const MySwal = withReactContent(Swal);
 
-  MySwal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const newTodoList = todoList.filter(t => {
-        return t.id !== id
-      })
-      setTodoList(newTodoList)
-      Swal.fire(
-        'Deleted!',
-        'Your item has been deleted.',
-        'success'
-      )
-    }
-  })
-    
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newTodoList = todoList.filter((t) => {
+          return t.id !== item.id;
+        });
+        setTodoList(newTodoList);
+        Swal.fire("Deleted!", `${item.todo} has been deleted.`, "success");
+      }
+    });
   }
 
   return (
     <main>
-      <AddTodo todoName={todoName} onTodoNameChange={handleTodoNameChange} onAddTodoSubmit={handleAddTodoSubmit} />
+      <AddTodo
+        todoName={todoName}
+        onTodoNameChange={handleTodoNameChange}
+        onAddTodoSubmit={handleAddTodoSubmit}
+        showError={showError}
+      />
       <hr className="devider" />
-      <TodoList todoList={todoList} onDeleteClick={handleDeleteClick} onEditClick={handleEditClick} />
+      <TodoList
+        todoList={todoList}
+        onDeleteClick={handleDeleteClick}
+        onEditClick={handleEditClick}
+      />
     </main>
-  )
+  );
 }

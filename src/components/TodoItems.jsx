@@ -14,7 +14,7 @@ export default function TodoItems({item, onDeleteClick, onEditClick}) {
                     completed: e.target.checked
                 })} />
                 <button className="edit-btn" onClick={() => setIsEditing(true)}><FaPencil /></button>
-                <button className="delete-btn" onClick={() => onDeleteClick(item.id)}><FaTrash /></button>
+                <button className="delete-btn" onClick={() => onDeleteClick(item)}><FaTrash /></button>
                </div>
             </div>
             ) : (

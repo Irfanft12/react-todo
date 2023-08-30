@@ -14,12 +14,31 @@ body {
   font-family: "Quicksand", sans-serif;
   min-height: 100%;
 }
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.logo {
+  width: 50px;
+  margin-right: 5px;
+  display: block;
+}
+.logo-text {
+  color: #69b7eb;
+  font-weight: 600;
+}
+.logo-text span {
+  color: #fa93a4;
+  margin-right: 4px;
+}
 main {
   width: 600px;
   max-width: 90%;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .add-task-form {
   max-width: 486px;

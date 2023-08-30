@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
+import logo from "./assets/preview-image.png"
 
 export default function App() {
   const [todoList, setTodoList] = useState(() => {
@@ -78,7 +79,12 @@ export default function App() {
   }
 
   return (
-    <main>
+    <>
+      <header>
+        <img src={logo} alt="" className="logo" />
+        <div className="logo-text"><span>Todo</span>App</div>
+      </header>
+      <main>
       <AddTodo
         todoName={todoName}
         onTodoNameChange={handleTodoNameChange}
@@ -92,5 +98,7 @@ export default function App() {
         onEditClick={handleEditClick}
       />
     </main>
+    </>
+    
   );
 }
